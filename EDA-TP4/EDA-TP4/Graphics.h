@@ -11,7 +11,6 @@
 #include <allegro5\display.h>
 #include <allegro5\allegro_image.h>
 
-
 class Graphics
 {
 public:
@@ -28,10 +27,8 @@ private:
 	ALLEGRO_MONITOR_INFO monitorInfo;
 
 	bool allegroState;
-
 	bool initAllegro();
+
 	void graphBackground();
 };
-
-
 #endif // !GRAPHICS_H
