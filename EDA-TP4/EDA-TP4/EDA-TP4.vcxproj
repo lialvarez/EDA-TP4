@@ -71,6 +71,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <Allegro_AddonImage>true</Allegro_AddonImage>
+    <Allegro_AddonPrimitives>true</Allegro_AddonPrimitives>
+    <Allegro_AddonAudio>true</Allegro_AddonAudio>
+    <Allegro_AddonAcodec>true</Allegro_AddonAcodec>
+    <Allegro_LibraryType>DynamicDebug</Allegro_LibraryType>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -149,7 +154,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Graphics.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
