@@ -13,6 +13,7 @@ int main()
 	for (unsigned int frame = 0; frame < 50; frame++)
 	{
 		g.refreshScreen(p, 2, true, frame);
+		al_rest(0.02);
 	}
 	getchar();
 	return 0;

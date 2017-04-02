@@ -10,6 +10,8 @@
 #include <allegro5\allegro.h>
 #include <allegro5\display.h>
 #include <allegro5\allegro_image.h>
+#include <allegro5\allegro_primitives.h>
+#include <allegro5\color.h>
 
 #define WALKPICS	15
 #define JUMPPICS	10

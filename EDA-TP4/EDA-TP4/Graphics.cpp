@@ -14,79 +14,90 @@ bool Graphics::initAllegro()
 {
 	if (al_init())
 	{
-		if (al_init_image_addon())
+		if (al_init_primitives_addon())
 		{
-			std::ostringstream fileNum;
-			std::string auxString;
-
-			background = al_load_bitmap("resources/Scenario.png");
-			if (background != NULL)
+			if (al_init_image_addon())
 			{
-				for (unsigned int i = 0; i < WALKPICS; i++)
-				{
-					auxString = "resources/wwalking/wwalk-F";
-					fileNum << i + 1;
-					auxString += fileNum.str();
-					auxString += ".png";
-					char *fileName = new char[auxString.length() + 1];
-					strcpy_s(fileName, auxString.length() + 1, auxString.c_str());
-					wormWalk[i] = al_load_bitmap(fileName);
-					if (wormWalk[i] == NULL)
-					{
-						delete[] fileName;
-						std::cerr << "Failed to load \"" << auxString << "\"!" << std::endl;
-						return false;
-					}
-					delete[] fileName;
-					fileNum.str("");
-					fileNum.clear();
-					auxString.clear();
-				}
+				std::ostringstream fileNum;
+				std::string auxString;
 
-				for (unsigned int i = 0; i < JUMPPICS; i++)
+				background = al_load_bitmap("resources/Scenario.png");
+				if (background != NULL)
 				{
-					auxString = "resources/wjump/wjump-F";
-					fileNum << i + 1;
-					auxString += fileNum.str();
-					auxString += ".png";
-					char *fileName = new char[auxString.length() + 1];
-					strcpy_s(fileName, auxString.length() + 1, auxString.c_str());
-					wormJump[i] = al_load_bitmap(fileName);
-					if (wormWalk[i] == NULL)
+					for (unsigned int i = 0; i < WALKPICS; i++)
 					{
+						auxString = "resources/wwalking/wwalk-F";
+						fileNum << i + 1;
+						auxString += fileNum.str();
+						auxString += ".png";
+						char *fileName = new char[auxString.length() + 1];
+						strcpy_s(fileName, auxString.length() + 1, auxString.c_str());
+						wormWalk[i] = al_load_bitmap(fileName);
+						if (wormWalk[i] == NULL)
+						{
+							delete[] fileName;
+							std::cerr << "Failed to load \"" << auxString << "\"!" << std::endl;
+							return false;
+						}
 						delete[] fileName;
-						std::cerr << "Failed to load \"" << auxString << "\"!" << std::endl;
+						fileNum.str("");
+						fileNum.clear();
+						auxString.clear();
+					}
+
+					for (unsigned int i = 0; i < JUMPPICS; i++)
+					{
+						auxString = "resources/wjump/wjump-F";
+						fileNum << i + 1;
+						auxString += fileNum.str();
+						auxString += ".png";
+						char *fileName = new char[auxString.length() + 1];
+						strcpy_s(fileName, auxString.length() + 1, auxString.c_str());
+						wormJump[i] = al_load_bitmap(fileName);
+						if (wormWalk[i] == NULL)
+						{
+							delete[] fileName;
+							std::cerr << "Failed to load \"" << auxString << "\"!" << std::endl;
+							return false;
+						}
+						delete[] fileName;
+						fileNum.str("");
+						fileNum.clear();
+						auxString.clear();
+					}
+					display = al_create_display(al_get_bitmap_width(background), al_get_bitmap_height(background));
+					al_clear_to_color(al_map_rgb(0, 0, 0));
+					al_flip_display();
+					if (display != NULL)
+					{
+						return true;
+					}
+					else
+					{
+						std::cerr << "Failed to create display!" << std::endl;
 						return false;
 					}
-					delete[] fileName;
-					fileNum.str("");
-					fileNum.clear();
-					auxString.clear();
-				}
-				display = al_create_display(al_get_bitmap_width(background), al_get_bitmap_height(background));
-				al_clear_to_color(al_map_rgb(0, 0, 0));
-				al_flip_display();
-				if (display != NULL)
-				{
-					return true;
 				}
 				else
 				{
-					std::cerr << "Failed to create display!" << std::endl;
+					std::cerr << "Failed to load \"Scenario.png\"!" << std::endl;
 					return false;
 				}
 			}
 			else
 			{
-				std::cerr << "Failed to load \"Scenario.png\"!" << std::endl;
+				std::cerr << "Failed to load Images Addon!" << std::endl;
 				return false;
 			}
+
 		}
 		else
 		{
-			std::cerr << "Failed to load Images Addon!" << std::endl;
+			std::cerr << "Failed to load Primitives Addon!" << std::endl;
 			return false;
 		}
+
+
 	}
 	else
 	{
@@ -173,7 +184,6 @@ void Graphics::setDrawingPoint(Position& p, unsigned int frameCount, bool invert
 
 void Graphics::refreshScreen(Position _p, unsigned int _wormstate, bool _facingRight, unsigned int _frameCount)
 {
-	al_clear_to_color(al_map_rgb(0, 0, 0));
 	switch (_wormstate)
 	{
 	case Still:
@@ -190,7 +200,9 @@ void Graphics::refreshScreen(Position _p, unsigned int _wormstate, bool _facingR
 
 	case Walking:
 
-		drawBackground();
+		//drawBackground();
+		al_draw_filled_rectangle(701, 400, 1212, 616, al_map_rgb(0, 0, 0));
+		al_flip_display();
 		setDrawingPoint(_p, _frameCount, _facingRight);
 		if (_frameCount < 8)
 		{
@@ -249,6 +261,11 @@ void Graphics::refreshScreen(Position _p, unsigned int _wormstate, bool _facingR
 	case Jumping:
 
 		drawBackground();
+		if (_frameCount < 5)
+		{
+			drawWorm(wormJump[_frameCount], _p, _facingRight);
+			break;
+		}
 		drawWorm(wormJump[F5], _p, _facingRight);
 		break;
 
