@@ -1,10 +1,9 @@
-#pragma once
+#ifndef WORMS_H
+#define WORMS_H
 
 #define PI 3.14159265358979
 
-typedef enum {Still, WalkPending, Walking, Jumping, WalkEnding, JumpEnding} wormstate;
-
-
+typedef enum { Still, WalkPending, Walking, Jumping, WalkEnding, JumpEnding } wormstate;
 
 class Worms
 {
@@ -32,7 +31,9 @@ private:
 	unsigned frameCount;
 	double gConstant = 0.24;
 	const double speed = (24 / 50);
-	const double speedX = (24 / 50) * cos(PI/3);
-	const double speedY = (24 / 50) * sin(PI/3);
+	const double speedX = (24 / 50) * cos(PI / 3);
+	const double speedY = (24 / 50) * sin(PI / 3);
 
 };
+
+#endif // !WORMS_H

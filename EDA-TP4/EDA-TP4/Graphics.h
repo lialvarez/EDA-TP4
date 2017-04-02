@@ -1,8 +1,8 @@
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
-#define WALKPICS	15
-#define JUMPPICS	10
 
+
+#include "Position.h"
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -11,13 +11,24 @@
 #include <allegro5\display.h>
 #include <allegro5\allegro_image.h>
 
+#define WALKPICS	15
+#define JUMPPICS	10
+#define X_OFFSET	-42
+#define	Y_OFFSET	38
+
 class Graphics
 {
 public:
 
+	
+	void refreshScreen(Position _p, unsigned int _wormstate, bool _facingRight, unsigned int _frameCount);
 	Graphics();
 	
 private:
+
+
+	typedef enum { F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15 } imageIndex;
+	typedef enum { Still, WalkPending, Walking, Jumping, WalkEnding, JumpEnding } wormstate;
 
 	ALLEGRO_DISPLAY *display = NULL;
 	ALLEGRO_BITMAP *background = NULL;
@@ -27,8 +38,12 @@ private:
 	ALLEGRO_MONITOR_INFO monitorInfo;
 
 	bool allegroState;
-	bool initAllegro();
 
-	void graphBackground();
+	bool initAllegro();
+	void drawBackground();
+	void drawWorm(ALLEGRO_BITMAP *wormBitmap, Position p, bool inverted);
+	void drawWalkingWorm(Position p, bool inverted, unsigned int frameCount);
+	void drawJumpingWorm(Position p, bool inverted, unsigned int frameCount);
+
 };
 #endif // !GRAPHICS_H
