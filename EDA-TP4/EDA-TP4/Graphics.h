@@ -42,8 +42,6 @@ private:
 	bool initAllegro();
 	void drawBackground();
 	void drawWorm(ALLEGRO_BITMAP *wormBitmap, Position p, bool inverted);
-	void drawWalkingWorm(Position p, bool inverted, unsigned int frameCount);
-	void drawJumpingWorm(Position p, bool inverted, unsigned int frameCount);
-
+	void setDrawingPoint(Position& p, unsigned int frameCount, bool inverted);
 };
 #endif // !GRAPHICS_H

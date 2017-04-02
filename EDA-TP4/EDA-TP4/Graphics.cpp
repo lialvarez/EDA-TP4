@@ -131,79 +131,42 @@ void Graphics::drawWorm(ALLEGRO_BITMAP *wormBitmap, Position p, bool inverted)
 	}
 }
 
-void Graphics::drawWalkingWorm(Position p, bool inverted, unsigned int frameCount)
+void Graphics::setDrawingPoint(Position& p, unsigned int frameCount, bool inverted)
 {
-	Position auxP;
-	if (allegroState)
+	if (frameCount > 20 && frameCount < 35)
 	{
-		if (frameCount < 8) //WarmUp
+		if (inverted)
 		{
-			if (frameCount > 4)
-			{
-				drawWorm(wormWalk[frameCount - 5], p, inverted);
-				return;
-			}
-			else
-			{
-				drawWorm(wormWalk[F4], p, inverted);
-				return;
-			}
+			p.setX(p.getX() + 9);
 		}
 		else
 		{
-			if (frameCount > 22 && frameCount < 36)	//Si la condicion es verdadera esta en el segundo ciclo de la secuencia Walking
-			{
-				frameCount -= 14;
-				if (inverted)
-				{
-					p.setX(p.getX() + 9);
-				}
-				else
-				{
-					p.setX(p.getX() - 9);
-				}
-			}
-			else
-			{
-				if (frameCount > 35)	//Si la condicion es verdadera esta en el tercer ciclo de la secuencia.
-				{
-					frameCount -= 28;
-					if (inverted)
-					{
-						p.setX(p.getX() + 18);
-					}
-					else
-					{
-						p.setX(p.getX() - 18);
-					}
-				}
-				// Si ninguna de las anteriores es verdad, no se modifica frame count.
-			}
-			if (frameCount != 21)
-			{
-				if (frameCount < 16)
-				{
-					drawWorm(wormWalk[frameCount - 5], p, inverted);
-					return;
-				}
-				else if (frameCount >= 16)
-				{
-					drawWorm(wormWalk[frameCount - 6], p, inverted);
-					return;
-				}
-			}
-			else
-			{
-				drawWorm(wormWalk[F4], p, inverted);
-				return;
-			}
-			
+			p.setX(p.getX() - 9);
 		}
-
+		return;
 	}
-	else
-	{	
-		std::cerr << "Failed to draw Walking Warm" << std::endl;
+	if (frameCount > 34 && frameCount < 49)
+	{
+		if (inverted)
+		{
+			p.setX(p.getX() + 18);
+		}
+		else
+		{
+			p.setX(p.getX() - 18);
+		}
+		return;
+	}
+	if (frameCount == 49)
+	{
+		if (inverted)
+		{
+			p.setX(p.getX() + 27);
+		}
+		else
+		{
+			p.setX(p.getX() - 27);
+		}
 		return;
 	}
 }
@@ -222,13 +185,65 @@ void Graphics::refreshScreen(Position _p, unsigned int _wormstate, bool _facingR
 	case WalkPending:
 
 		drawBackground();
-		drawWalkingWorm(_p, _facingRight, _frameCount);
+		drawWorm(wormWalk[F4], _p, _facingRight);
 		break;
 
 	case Walking:
 
 		drawBackground();
-		drawWalkingWorm(_p, _facingRight, _frameCount);
+		setDrawingPoint(_p, _frameCount, _facingRight);
+		if (_frameCount < 8)
+		{
+			if (_frameCount < 5)
+			{
+				drawWorm(wormWalk[F4], _p, _facingRight);
+			}
+			else
+			{
+				drawWorm(wormWalk[_frameCount - 5], _p, _facingRight);
+			}
+			break;
+		}
+		if (_frameCount > 7 && _frameCount < 21)
+		{
+			if (_frameCount < 16)
+			{
+				drawWorm(wormWalk[_frameCount - 5], _p, _facingRight);
+			}
+			else
+			{
+				drawWorm(wormWalk[_frameCount - 6], _p, _facingRight);
+			}
+			break;
+		}
+		if (_frameCount > 21 && _frameCount < 35)
+		{
+			if (_frameCount < 30)
+			{
+				drawWorm(wormWalk[_frameCount - 5 - 14], _p, _facingRight);
+			}
+			else
+			{
+				drawWorm(wormWalk[_frameCount - 6 - 14], _p, _facingRight);
+			}
+			break;
+		}
+		if (_frameCount > 35 && _frameCount < 49)
+		{
+			if (_frameCount < 44)
+			{
+				drawWorm(wormWalk[_frameCount - 5 - 28], _p, _facingRight);
+			}
+			else
+			{
+				drawWorm(wormWalk[_frameCount - 6 - 28], _p, _facingRight);
+			}
+			break;
+		}
+		if (_frameCount == 21 || _frameCount == 35 || _frameCount == 49)
+		{
+			drawWorm(wormWalk[F4], _p, _facingRight);
+		}
 		break;
 
 	case Jumping:
