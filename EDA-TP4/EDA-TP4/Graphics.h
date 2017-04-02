@@ -37,6 +37,7 @@ private:
 	ALLEGRO_BITMAP *wormJump[JUMPPICS];
 	ALLEGRO_BITMAP *wormWalk[WALKPICS];
 	ALLEGRO_BITMAP *test = NULL;
+	ALLEGRO_BITMAP *auxiliar = NULL;
 	ALLEGRO_MONITOR_INFO monitorInfo;
 
 	bool allegroState;

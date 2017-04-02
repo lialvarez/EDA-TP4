@@ -20,7 +20,8 @@ bool Graphics::initAllegro()
 			{
 				std::ostringstream fileNum;
 				std::string auxString;
-
+				
+				auxiliar = al_load_bitmap("resources/Auxiliar.png");
 				background = al_load_bitmap("resources/Scenario.png");
 				if (background != NULL)
 				{
@@ -188,20 +189,22 @@ void Graphics::refreshScreen(Position _p, unsigned int _wormstate, bool _facingR
 	{
 	case Still:
 
-		drawBackground();
+		al_draw_filled_rectangle(701, 400, 1212, 616, al_map_rgb(0, 0, 0));
+		al_draw_bitmap(auxiliar, 701, 616, 0);
 		drawWorm(wormWalk[F4], _p, _facingRight);
 		break;
 
 	case WalkPending:
 
-		drawBackground();
+		al_draw_filled_rectangle(701, 400, 1212, 616, al_map_rgb(0, 0, 0));
+		al_draw_bitmap(auxiliar, 701, 616, 0);
 		drawWorm(wormWalk[F4], _p, _facingRight);
 		break;
 
 	case Walking:
 
-		//drawBackground();
 		al_draw_filled_rectangle(701, 400, 1212, 616, al_map_rgb(0, 0, 0));
+		al_draw_bitmap(auxiliar, 701, 616, 0);
 		al_flip_display();
 		setDrawingPoint(_p, _frameCount, _facingRight);
 		if (_frameCount < 8)
@@ -260,7 +263,8 @@ void Graphics::refreshScreen(Position _p, unsigned int _wormstate, bool _facingR
 
 	case Jumping:
 
-		drawBackground();
+		al_draw_filled_rectangle(701, 400, 1212, 616, al_map_rgb(0, 0, 0));
+		al_draw_bitmap(auxiliar, 701, 616, 0);
 		if (_frameCount < 5)
 		{
 			drawWorm(wormJump[_frameCount], _p, _facingRight);
@@ -271,7 +275,8 @@ void Graphics::refreshScreen(Position _p, unsigned int _wormstate, bool _facingR
 
 	case JumpEnding:
 
-		drawBackground();
+		al_draw_filled_rectangle(701, 400, 1212, 616, al_map_rgb(0, 0, 0));
+		al_draw_bitmap(auxiliar, 701, 616, 0);
 		drawWorm(wormJump[_frameCount + 5], _p, _facingRight);
 		break;
 
