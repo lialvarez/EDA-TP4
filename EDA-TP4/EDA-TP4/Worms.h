@@ -1,9 +1,11 @@
-#ifndef WORMS_H
-#define WORMS_H
-
+#pragma once
+#include "Position.h"
+#include "graphics.h"
 #define PI 3.14159265358979
 
-typedef enum { Still, WalkPending, Walking, Jumping, WalkEnding, JumpEnding } wormstate;
+typedef enum {Still, WalkPending, Walking, Jumping, WalkEnding, JumpEnding} wormstate;
+
+
 
 class Worms
 {
@@ -26,14 +28,12 @@ public:
 
 private:
 	Position _Pos;
-	bool isFacingRight;
-	wormstate wormsIsDoing;
-	unsigned frameCount;
-	double gConstant = 0.24;
-	const double speed = (24 / 50);
-	const double speedX = (24 / 50) * cos(PI / 3);
-	const double speedY = (24 / 50) * sin(PI / 3);
+	bool _isFacingRight;
+	wormstate _wormsIsDoing;
+	unsigned _frameCount;
+	double _gConstant;
+	const double _speed;
+	const double _speedX;
+	 double _speedY;
 
 };
-
-#endif // !WORMS_H
