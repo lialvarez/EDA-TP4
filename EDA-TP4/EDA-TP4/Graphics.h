@@ -22,23 +22,26 @@ class Graphics
 {
 public:
 
-	
 	void refreshScreen(Position _p, unsigned int _wormstate, bool _facingRight, unsigned int _frameCount);
 	Graphics();
 	
 private:
 
-
 	typedef enum { F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15 } imageIndex;
 	typedef enum { Still, WalkPending, Walking, Jumping, WalkEnding, JumpEnding } wormstate;
 
 	ALLEGRO_DISPLAY *display = NULL;
+	ALLEGRO_DISPLAY_MODE dispData;
 	ALLEGRO_BITMAP *background = NULL;
+	ALLEGRO_BITMAP *scaledBackground = NULL;
 	ALLEGRO_BITMAP *wormJump[JUMPPICS];
 	ALLEGRO_BITMAP *wormWalk[WALKPICS];
 	ALLEGRO_BITMAP *test = NULL;
 	ALLEGRO_BITMAP *auxiliar = NULL;
 	ALLEGRO_MONITOR_INFO monitorInfo;
+
+	float xRes;
+	float yRes;
 
 	bool allegroState;
 
