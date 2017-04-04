@@ -11,6 +11,11 @@ Graphics::Graphics()
 	al_flip_display();
 }
 
+ALLEGRO_DISPLAY *Graphics::getDisplay()
+{
+	return display;
+}
+
 bool Graphics::initAllegro()
 {
 	if (al_init())
@@ -67,7 +72,7 @@ bool Graphics::initAllegro()
 						fileNum.clear();
 						auxString.clear();
 					}
-					al_get_display_mode(al_get_num_display_modes() - 1, &dispData);
+					al_get_display_mode(al_get_num_display_modes() - 5, &dispData);
 					display = al_create_display(dispData.width, dispData.height);
 					al_clear_to_color(al_map_rgb(0, 0, 0));
 					al_flip_display();
@@ -193,23 +198,17 @@ void Graphics::refreshScreen(Position _p, unsigned int _wormstate, bool _facingR
 	{
 	case Still:
 
-		al_draw_filled_rectangle(701 / xRes, 400 / yRes, 1212 / xRes, 616 / yRes, al_map_rgb(0, 0, 0));
-		al_draw_bitmap(auxiliar, 701 / xRes, 616, 0);
 		drawWorm(wormWalk[F4], _p, _facingRight);
 		break;
 
 	case WalkPending:
 
-		al_draw_filled_rectangle(701 / xRes, 400 / yRes, 1212 / xRes, 616 / yRes, al_map_rgb(0, 0, 0));
-		al_draw_bitmap(auxiliar, 701 / xRes, 616 / yRes, 0);
+
 		drawWorm(wormWalk[F4], _p, _facingRight);
 		break;
 
 	case Walking:
 
-		al_draw_scaled_bitmap(auxiliar, 0, 0, al_get_bitmap_width(auxiliar), al_get_bitmap_height(auxiliar), 666 / xRes, 562 / yRes, al_get_bitmap_width(auxiliar) / xRes, al_get_bitmap_height(auxiliar) / yRes, 0);
-		al_draw_filled_rectangle(701 / xRes, 400 / yRes, 1212 / xRes, 616 / yRes, al_map_rgb(0, 0, 0));
-		al_flip_display();
 		setDrawingPoint(_p, _frameCount, _facingRight);
 		if (_frameCount < 8)
 		{
@@ -267,9 +266,6 @@ void Graphics::refreshScreen(Position _p, unsigned int _wormstate, bool _facingR
 
 	case Jumping:
 
-		al_draw_filled_rectangle(701 / xRes, 400 / yRes, 1212 / xRes, 616 / yRes, al_map_rgb(0, 0, 0));
-		al_draw_bitmap(auxiliar, 701 / xRes, 616 / yRes, 0);
-		al_draw_scaled_bitmap(auxiliar, 0, 0, al_get_bitmap_width(auxiliar), al_get_bitmap_height(auxiliar), 701 / xRes, 616 / yRes, al_get_bitmap_width(auxiliar) / xRes, al_get_bitmap_height(auxiliar) / yRes, 0);
 		if (_frameCount < 5)
 		{
 			drawWorm(wormJump[_frameCount], _p, _facingRight);
@@ -280,8 +276,6 @@ void Graphics::refreshScreen(Position _p, unsigned int _wormstate, bool _facingR
 
 	case JumpEnding:
 
-		al_draw_filled_rectangle(701 / xRes, 400 / yRes, 1212 / xRes, 616 / yRes, al_map_rgb(0, 0, 0));
-		al_draw_bitmap(auxiliar, 701 / xRes, 616 / yRes, 0);
 		drawWorm(wormJump[_frameCount + 5], _p, _facingRight);
 		break;
 
@@ -290,3 +284,10 @@ void Graphics::refreshScreen(Position _p, unsigned int _wormstate, bool _facingR
 	}
 	al_flip_display();
 }
+
+void Graphics::auxRefresh()
+{
+	al_draw_scaled_bitmap(auxiliar, 0, 0, al_get_bitmap_width(auxiliar), al_get_bitmap_height(auxiliar), 666 / xRes, 562 / yRes, al_get_bitmap_width(auxiliar) / xRes, al_get_bitmap_height(auxiliar) / yRes, 0);
+	al_draw_filled_rectangle(701 / xRes, 400 / yRes, 1212 / xRes, 616 / yRes, al_map_rgb(0, 0, 0));
+}
+

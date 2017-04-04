@@ -22,7 +22,9 @@ class Graphics
 {
 public:
 
+	ALLEGRO_DISPLAY *getDisplay();
 	void refreshScreen(Position _p, unsigned int _wormstate, bool _facingRight, unsigned int _frameCount);
+	void auxRefresh();
 	Graphics();
 	
 private:

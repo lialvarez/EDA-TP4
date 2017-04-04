@@ -17,12 +17,12 @@ void main(void)
 	{
 		cout << "WORMASTATA: " << worm1.getWormstate() << endl;
 		cout << "POSX1: " << worm1.getPosition().getX() << endl;
-		//cout << "POSX2: " << worm2.getPosition().getX() << endl;
-		cout << "FRAMCECONTU: " << worm1.getFrameCount() << endl;
+		cout << "POSX2: " << worm2.getPosition().getX() << endl;
 		graph.refreshScreen(worm1.getPosition(), worm1.getWormstate(), worm1.getIsFacingRight(), worm1.getFrameCount());
-		//graph.refreshScreen(worm2.getPosition(), worm2.getWormstate(), worm2.getIsFacingRight(), worm2.getFrameCount());
+		graph.refreshScreen(worm2.getPosition(), worm2.getWormstate(), worm2.getIsFacingRight(), worm2.getFrameCount());
 		tecla = D_DOWN;
-			if (tecla != NO_CHAR)
+
+		if (tecla != NO_CHAR)
 		{
 			if (tecla == A_UP)
 				worm1.updateWormsPosition(Left_UP);
