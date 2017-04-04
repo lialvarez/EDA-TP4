@@ -102,6 +102,8 @@ void Worms::updateWormsPosition(key_e tecla)
 
 	else if (_wormIsDoing == WalkPending)
 	{
+		if(_frameCount>5)
+			_frameCount = 0;
 		switch (tecla)
 		{
 			case Left_UP:
@@ -117,7 +119,7 @@ void Worms::updateWormsPosition(key_e tecla)
 			break;
 		}
 
-		if (_frameCount++ == 5)					//si pase los primeros 100ms 
+		if (_frameCount == 5)					//si pase los primeros 100ms 
 			_wormIsDoing = Walking;
 
 		_frameCount++;
