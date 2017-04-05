@@ -7,7 +7,7 @@
 
 using namespace std;
 
-const float FPS = 40;
+const float FPS = 50;
 
 int main()
 {
@@ -17,6 +17,7 @@ int main()
 	keyEvents keyEv;
 	Graphics g;
 	Worms *worm = new Worms[2];
+	bool auxFlag = true;
 	
 
 	if (!al_install_keyboard()) {
@@ -58,7 +59,7 @@ int main()
 		}
 		al_flip_display();
 		//Solo para debug.
-		if (keyEv != NO_KEY)
+		if (keyEv != NO_KEY && auxFlag)
 		{
 			dispatch(keyEv, worm);
 			switch (keyEv)
@@ -105,6 +106,7 @@ int main()
 		}
 		if (keyEv == NO_KEY)
 		{
+			auxFlag = true;
 			cout << "NADA" << endl;
 		}
 		for (unsigned int i = 0; i < 2; i++)
@@ -136,6 +138,10 @@ int main()
 			default:
 				break;
 			}
+		}
+		if (keyEv == KEY_A_DOWN || keyEv == KEY_W_DOWN || keyEv == KEY_D_DOWN || keyEv == KEY_LEFT_DOWN || keyEv == KEY_UP_DOWN || keyEv == KEY_RIGHT_DOWN)
+		{
+			auxFlag = false;
 		}
 	} while (keyEv != QUIT);
 		

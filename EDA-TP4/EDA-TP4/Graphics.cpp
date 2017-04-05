@@ -72,7 +72,7 @@ bool Graphics::initAllegro()
 						fileNum.clear();
 						auxString.clear();
 					}
-					al_get_display_mode(al_get_num_display_modes() - 1, &dispData);
+					al_get_display_mode(al_get_num_display_modes() - 5, &dispData);
 					display = al_create_display(dispData.width, dispData.height);
 					al_clear_to_color(al_map_rgb(0, 0, 0));
 					al_flip_display();
