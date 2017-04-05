@@ -33,6 +33,7 @@ void Worms::startWalking()
 
 void Worms::continueWalking()
 {
+	state = Walking;
 	if (frameCounter == 49)
 	{
 		if (lookingRight && wormPos.getX() < 1212 - WORM_OFFSET_RIGHT)
