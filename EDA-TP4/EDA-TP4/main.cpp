@@ -62,83 +62,42 @@ int main()
 		if (keyEv != NO_KEY && auxFlag)
 		{
 			dispatch(keyEv, worm);
-			switch (keyEv)
-			{
-			case KEY_UP_DOWN:
-				cout << "KEY_UP Pressed" << endl;
-				break;
-			case KEY_RIGHT_DOWN:
-				cout << "KEY_RIGHT Pressed" << endl;
-				break;
-			case KEY_LEFT_DOWN:
-				cout << "KEY_LEFT Pressed" << endl;
-				break;
-			case KEY_UP_UP:
-				cout << "KEY_UP Released" << endl;
-				break;
-			case KEY_RIGHT_UP:
-				cout << "KEY_RIGHT Released" << endl;
-				break;
-			case KEY_LEFT_UP:
-				cout << "KEY_LEFT Released" << endl;
-				break;
-			case KEY_W_DOWN:
-				cout << "KEY_W Pressed" << endl;
-				break;
-			case KEY_A_DOWN:
-				cout << "KEY_A Pressed" << endl;
-				break;
-			case KEY_D_DOWN:
-				cout << "KEY_D Pressed" << endl;
-				break;
-			case KEY_W_UP:
-				cout << "KEY_W Released" << endl;
-				break;
-			case KEY_A_UP:
-				cout << "KEY_A Released" << endl;
-				break;
-			case KEY_D_UP:
-				cout << "KEY_D Released" << endl;
-				break;
-			default:
-				break;
-			}
 		}
 		if (keyEv == NO_KEY)
 		{
 			auxFlag = true;
-			cout << "NADA" << endl;
-		}
-		for (unsigned int i = 0; i < 2; i++)
-		{
-			switch (worm[i].getWormState())
+			for (unsigned int i = 0; i < 2; i++)
 			{
-			case WalkPending:
-				worm[i].continueWalkPending();
-				break;
+				switch (worm[i].getWormState())
+				{
+				case WalkPending:
+					worm[i].continueWalkPending();
+					break;
 
-			case Walking:
-				worm[i].continueWalking();
-				break;
+				case Walking:
+					worm[i].continueWalking();
+					break;
 
-			case WalkEnding:
-				worm[i].continueWalkEnding();
-				break;
+				case WalkEnding:
+					worm[i].continueWalkEnding();
+					break;
 
-			case JumpStarting:
-				worm[i].continueStartJumping();
-				break;
+				case JumpStarting:
+					worm[i].continueStartJumping();
+					break;
 
-			case Jumping:
-				worm[i].continueJumping();
-				break;
+				case Jumping:
+					worm[i].continueJumping();
+					break;
 
-			case JumpEnding:
-				worm[i].continueJumpEnding();
-			default:
-				break;
+				case JumpEnding:
+					worm[i].continueJumpEnding();
+				default:
+					break;
+				}
 			}
 		}
+		
 		if (keyEv == KEY_A_DOWN || keyEv == KEY_W_DOWN || keyEv == KEY_D_DOWN || keyEv == KEY_LEFT_DOWN || keyEv == KEY_UP_DOWN || keyEv == KEY_RIGHT_DOWN)
 		{
 			auxFlag = false;

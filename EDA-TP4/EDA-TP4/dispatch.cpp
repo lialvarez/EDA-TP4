@@ -55,6 +55,7 @@ void dispatch(keyEvents ev, Worms *wormArr)
 					break;
 				case KEY_D_UP:
 					wormArr[i].setWalkEnding();
+					break;
 				default:
 					wormArr[i].continueWalking();
 					break;
