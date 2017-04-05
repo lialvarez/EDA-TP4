@@ -72,7 +72,7 @@ bool Graphics::initAllegro()
 						fileNum.clear();
 						auxString.clear();
 					}
-					al_get_display_mode(al_get_num_display_modes() - 5, &dispData);
+					al_get_display_mode(al_get_num_display_modes() - 1, &dispData);
 					display = al_create_display(dispData.width, dispData.height);
 					al_clear_to_color(al_map_rgb(0, 0, 0));
 					al_flip_display();
@@ -209,7 +209,6 @@ void Graphics::refreshScreen(Position _p, unsigned int _wormstate, bool _facingR
 
 	case WalkPending:
 
-
 		drawWorm(wormWalk[F4], _p, _facingRight);
 		break;
 
@@ -218,14 +217,7 @@ void Graphics::refreshScreen(Position _p, unsigned int _wormstate, bool _facingR
 		setDrawingPoint(_p, _frameCount, _facingRight);
 		if (_frameCount < 8)
 		{
-			if (_frameCount < 5)
-			{
-				drawWorm(wormWalk[F4], _p, _facingRight);
-			}
-			else
-			{
-				drawWorm(wormWalk[_frameCount - 5], _p, _facingRight);
-			}
+			drawWorm(wormWalk[_frameCount - 5], _p, _facingRight);
 			break;
 		}
 		if (_frameCount > 7 && _frameCount < 21)
@@ -270,13 +262,12 @@ void Graphics::refreshScreen(Position _p, unsigned int _wormstate, bool _facingR
 		}
 		break;
 
+	case JumpStarting:
+
+		drawWorm(wormJump[_frameCount], _p, _facingRight);
+		break;
 	case Jumping:
 
-		if (_frameCount < 5)
-		{
-			drawWorm(wormJump[_frameCount], _p, _facingRight);
-			break;
-		}
 		drawWorm(wormJump[F5], _p, _facingRight);
 		break;
 

@@ -24,10 +24,16 @@
     <ClCompile Include="Position.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="getKey.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Worms.cpp">
+    <ClCompile Include="dispatch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Worms2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,7 +44,13 @@
     <ClInclude Include="Position.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Worms.h">
+    <ClInclude Include="Worms2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="getKey.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dispatch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

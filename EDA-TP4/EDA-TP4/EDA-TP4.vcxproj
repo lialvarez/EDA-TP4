@@ -154,15 +154,19 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="dispatch.cpp" />
     <ClCompile Include="getKey.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Position.cpp" />
-    <ClCompile Include="Worms.cpp" />
+    <ClCompile Include="Worms2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dispatch.h" />
+    <ClInclude Include="getKey.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Position.h" />
-    <ClInclude Include="Worms.h" />
+    <ClInclude Include="Worms2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
