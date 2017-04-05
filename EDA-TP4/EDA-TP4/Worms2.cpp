@@ -46,7 +46,11 @@ void Worms::continueWalking()
 		state = WalkPending;
 		frameCounter = 0;
 	}
-	frameCounter++;
+	else
+	{
+		frameCounter++;
+	}
+	
 }
 
 void Worms::setWalkEnding()

@@ -21,10 +21,10 @@ public:
 	unsigned int getFrameCounter();
 	bool getLookingRight();
 
-	void startWalkPending();
-	void continueWalkPending();
-	void stopWalkPending();
-	void startWalking();
+	void startWalkPending();	
+	void continueWalkPending();	
+	void stopWalkPending();		
+	void startWalking();		
 	void continueWalking();
 	void setWalkEnding();
 	void continueWalkEnding();
