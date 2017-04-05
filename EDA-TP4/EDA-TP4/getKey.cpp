@@ -210,8 +210,11 @@ int main(int argc, char **argv) {
 			break;
 		}
 
-		g.refreshScreen(worm1.getPosition(), worm1.getWormstate(), worm1.getIsFacingRight(), worm1.get)
-		
+		g.auxRefresh();
+		g.refreshScreen(worm1.getPosition(), worm1.getWormstate(), worm1.getIsFacingRight(), worm1.getFrameCount());
+		g.refreshScreen(worm2.getPosition(), worm2.getWormstate(), worm2.getIsFacingRight(), worm2.getFrameCount());
+		al_flip_display();
+
 		if (keyEvent <= 5 && keyEvent != NO_CHAR)
 		{
 			worm1.updateWormsPosition(keyEvent);

@@ -194,6 +194,12 @@ void Graphics::refreshScreen(Position _p, unsigned int _wormstate, bool _facingR
 	
 	_p.setX(_p.getX() / xRes);
 	_p.setY(_p.getY() / yRes);
+
+	if (_wormstate == WalkEnding)
+	{
+		_wormstate = Walking;
+	}
+
 	switch (_wormstate)
 	{
 	case Still:
@@ -282,7 +288,6 @@ void Graphics::refreshScreen(Position _p, unsigned int _wormstate, bool _facingR
 	default:
 		break;
 	}
-	al_flip_display();
 }
 
 void Graphics::auxRefresh()

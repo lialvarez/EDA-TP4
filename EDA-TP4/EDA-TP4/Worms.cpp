@@ -112,46 +112,74 @@ void Worms::updateWormsPosition(unsigned int tecla)
 		//Solo resetea el frme Counter cuando termina de caminar
 		switch (tecla)
 		{
-			case Left_UP:
-				_frameCount = 0;
-				_wormIsDoing = Still;
-				break;
 
-			case Right_UP:
-				_frameCount = 0;
-				_wormIsDoing = Still;
-				break;
-			default:
+		case NO_CHAR:
+			_frameCount++;
+			break;
+
+		case Left_UP:
+			_frameCount = 0;
+			_wormIsDoing = Still;
+			break;
+
+		case Right_UP:
+			_frameCount = 0;
+			_wormIsDoing = Still;
+			break;
+		default:
 			break;
 		}
 
-		if (_frameCount == 5)					//si pase los primeros 100ms 
+		if (_frameCount == 4)					//si pase los primeros 100ms 
 			_wormIsDoing = Walking;
-
 		_frameCount++;
 	}
-	
+
 	else if (_wormIsDoing == Walking)
 	{
+
 		if (_frameCount == 49)				//ultimo frame de la caminata
 		{
 			if (_isFacingRight && _Pos.getX()<1212 - WORM_OFFSET_RIGHT)
-				_Pos.setX(_Pos.getX()+_walkDistance);
+				_Pos.setX(_Pos.getX() + _walkDistance);
 
 			else if (!_isFacingRight && _Pos.getX()>701 + WORM_OFFSET_LEFT)
 				_Pos.setX(_Pos.getX() - _walkDistance);
 
-			if (_isFacingRight && tecla == Right_DOWN)			//si estoy presionando el boton para ir donde estoy moviendome
+			if (tecla == NO_CHAR)			//si estoy presionando el boton para ir donde estoy moviendome
+			{
 				_wormIsDoing = WalkPending;
-
-			else if (!_isFacingRight && tecla == Left_DOWN)			// => me sigo moviendo
-				_wormIsDoing = WalkPending;
-
-			else
-				_wormIsDoing = Still;
-
+				_frameCount = 0;
+			}
 		}
-		_frameCount++;
+		if(tecla == Left_UP || tecla == Right_UP)
+		{
+			_wormIsDoing = WalkEnding;
+		}
+		
+		else
+		{
+			if (_frameCount < 49 && tecla == NO_CHAR)
+			{
+				_frameCount++;
+			}
+		}
+	}
+
+	else if (_wormIsDoing == WalkEnding)
+	{
+				if (_frameCount == 49)				//ultimo frame de la caminata
+		{
+			if (_isFacingRight && _Pos.getX()<1212 - WORM_OFFSET_RIGHT)
+				_Pos.setX(_Pos.getX() + _walkDistance);
+
+			else if (!_isFacingRight && _Pos.getX()>701 + WORM_OFFSET_LEFT)
+				_Pos.setX(_Pos.getX() - _walkDistance);
+
+			if (tecla == NO_CHAR)			//si estoy presionando el boton para ir donde estoy moviendome
+			{
+				_wormIsDoing = Still;
+			}
 	}
 
 	else if (_wormIsDoing == Jumping)
